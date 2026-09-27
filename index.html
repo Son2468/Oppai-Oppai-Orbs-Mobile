@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppai Orbs - Play Online</title>
+    <style>
+        /* ตั้งค่าพื้นหลังและจัดให้อยู่กึ่งกลาง */
+        body {
+            background-color: #1a1a1a;
+            color: #eeeeee;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* กล่องสำหรับใส่เกม */
+        .game-wrapper {
+            width: 100%;
+            max-width: 960px; /* ปรับความกว้างตามสัดส่วนเกมคุณได้ */
+            height: 600px;    /* ปรับความสูงตามสัดส่วนเกมคุณได้ */
+            background-color: #000;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ตัวเกมที่ดึงมาแสดง */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ปุ่มกด */
+        .controls {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+
+        /* ซ่อนส่วนอื่นๆ เวลาเข้าโหมดเต็มจอ */
+        :fullscreen .game-wrapper {
+            max-width: 100%;
+            height: 100vh;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="margin-bottom: 15px;">Oppai Orbs!</h1>
+
+    <!-- กล่องครอบเกม -->
+    <div class="game-wrapper" id="gameContainer">
+        <iframe src="Orbs.html" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+
+    <!-- เมนูควบคุม -->
+    <div class="controls">
+        <button onclick="toggleFullscreen()">🔲 เล่นเต็มจอ (Fullscreen)</button>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById("gameContainer");
+
+        // ฟังก์ชันสั่งขยายเต็มจอ (รองรับทุกเบราว์เซอร์)
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                if (gameContainer.requestFullscreen) {
+                    gameContainer.requestFullscreen();
+                } else if (gameContainer.webkitRequestFullscreen) { /* Safari */
+                    gameContainer.webkitRequestFullscreen();
+                } else if (gameContainer.msRequestFullscreen) { /* IE11 */
+                    gameContainer.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
